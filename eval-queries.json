@@ -1,0 +1,52 @@
+[
+  {
+    "query": "compose modifier hoisting",
+    "expected_source": "compose-api",
+    "expected_anchor_contains": "modifier"
+  },
+  {
+    "query": "state hoisting in composable",
+    "expected_source": "compose-api",
+    "expected_anchor_contains": "state"
+  },
+  {
+    "query": "kotlin property naming convention",
+    "expected_source": "kotlin-conventions",
+    "expected_anchor_contains": "naming"
+  },
+  {
+    "query": "lambda parameter naming",
+    "expected_source": "kotlin-conventions",
+    "expected_anchor_contains": "lambda"
+  },
+  {
+    "query": "trailing comma in kotlin",
+    "expected_source": "kotlin-conventions",
+    "expected_anchor_contains": "trailing"
+  },
+  {
+    "query": "package naming java",
+    "expected_source": "java-style",
+    "expected_anchor_contains": "package"
+  },
+  {
+    "query": "java import order",
+    "expected_source": "java-style",
+    "expected_anchor_contains": "import"
+  },
+  {
+    "query": "compose component slot api",
+    "expected_source": "compose-component-api",
+    "expected_anchor_contains": "slot"
+  },
+  {
+    "query": "kotlin code style migration switching to official",
+    "expected_source": "kotlin-style-migration",
+    "expected_anchor_contains": "official"
+  },
+  {
+    "query": "kotlin string template",
+    "expected_source": "kotlin-conventions",
+    "expected_anchor_contains": "string"
+  }
+]
