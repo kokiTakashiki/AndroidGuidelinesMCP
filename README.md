@@ -1,10 +1,10 @@
 # AndroidGuidelinesMCP
 
-Local MCP server that returns answers grounded in **the actual text** of the Android / Kotlin / Java public style guides — Kotlin Coding Conventions, the Kotlin Style Migration Guide, the Compose API and Component API Guidelines, and the Google Java Style Guide.
+Android / Kotlin / Java の公式スタイルガイド（Kotlin Coding Conventions、Kotlin Style Migration Guide、Compose API および Component API Guidelines、Google Java Style Guide）の **実テキスト** に基づいて回答を返すローカル MCP サーバです。
 
-See [DESIGN.md](DESIGN.md) for the design rationale (BM25 selection, source choices, ADR).
+設計方針（BM25 の採用理由、ソース選定、ADR など）は [DESIGN.md](DESIGN.md) を参照してください。
 
-## Quick start
+## クイックスタート
 
 ```bash
 make setup    # OpenJDK / Gradle / ktlint を Homebrew 経由でインストール（冪等）
@@ -30,7 +30,7 @@ make fetch    # 公式ガイドライン repo を .guidelines-data/ に取得（
 
 ## make ターゲット
 
-| Target | 用途 |
+| ターゲット | 用途 |
 | --- | --- |
 | `make setup` | OpenJDK / Gradle / ktlint を Homebrew でインストール（既存はスキップ） |
 | `make fetch` | `scripts/fetch-guidelines.sh` を実行（再実行で最新ブランチに追従） |
@@ -42,38 +42,38 @@ make fetch    # 公式ガイドライン repo を .guidelines-data/ に取得（
 | `make upgrade` | Homebrew 経由のツールをアップグレード |
 | `make clean` | ビルド成果物を削除 |
 
-## Tools
+## ツール
 
-| Tool | Scope |
+| ツール | 対象範囲 |
 | --- | --- |
 | `search_kotlin_conventions(query, limit?)` | Kotlin Coding Conventions |
 | `search_kotlin_style_migration(query, limit?)` | Kotlin Style Migration Guide |
 | `search_compose_api_guidelines(query, limit?)` | Compose API + Component API Guidelines |
 | `search_java_style(query, limit?)` | Google Java Style Guide |
-| `search_all_guidelines(query, limit?)` | Union of all of the above |
+| `search_all_guidelines(query, limit?)` | 上記すべての和集合 |
 
-`limit` defaults to 5, capped at 20.
+`limit` のデフォルトは 5、上限は 20 です。
 
-Each hit returns title, hierarchical section path, BM25 score, snippet, and a resource URI of the form `android-guidelines://<source-slug>/<anchor>` that can be fetched via the MCP `resources/read` flow.
+各ヒットには、タイトル、階層的なセクションパス、BM25 スコア、スニペット、および `android-guidelines://<source-slug>/<anchor>` 形式のリソース URI が含まれ、MCP の `resources/read` フローで取得できます。
 
-## Search
+## 検索
 
-BM25 (k1 = 1.2, b = 0.75), with a 4× title boost and minimal English stemming. See [docs/EVAL.md](docs/EVAL.md) for the regression eval set and current scores.
+BM25（k1 = 1.2、b = 0.75）を採用し、タイトルに 4 倍のブースト、英語向けの最小限のステミングを適用しています。リグレッション評価セットおよび現在のスコアは [docs/EVAL.md](docs/EVAL.md) を参照してください。
 
-## Development
+## 開発
 
-`make` ターゲット越しを推奨。直接 Gradle を叩きたい場合のショートカットは以下:
+基本的には `make` ターゲット経由での実行を推奨します。Gradle を直接叩きたい場合のショートカットは以下のとおりです:
 
 ```bash
-gradle test                # unit tests for tokenizer / BM25 / Markdown parser
-gradle run                 # run over stdio (requires .guidelines-data populated)
-gradle shadowJar           # build/libs/android-guidelines-mcp-0.1.0-all.jar
+gradle test                # tokenizer / BM25 / Markdown パーサのユニットテスト
+gradle run                 # stdio で起動（.guidelines-data の準備が必要）
+gradle shadowJar           # build/libs/android-guidelines-mcp-0.1.0-all.jar を生成
 ```
 
-## Future
+## 今後の予定
 
-- top-1 命中率 improvement (phrase boost / depth boost)
-- developer.android.com scraping fallback (separate binary)
-- Now in Android code index loader
-- Japanese query support (kuromoji)
-- Eval set expansion (target 30 queries)
+- top-1 命中率の改善（フレーズブースト / 深さブースト）
+- developer.android.com スクレイピングのフォールバック（別バイナリ）
+- Now in Android のコードインデックスローダー
+- 日本語クエリ対応（kuromoji）
+- 評価セットの拡充（30 クエリを目標）
